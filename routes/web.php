@@ -22,5 +22,5 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/category/index',[CategoryController::class,'index'])->name('category.index');
-Route::get('/category/create',[CategoryController::class,'create'])->name('category.create');
+//_Categories Route_//
+Route::resource('/categories',CategoryController::class);

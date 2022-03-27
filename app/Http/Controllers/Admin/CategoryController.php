@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -39,7 +40,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'category_name' => 'required|unique:categories|max:255',
+        ]);
+      
+        $storeCategory = new Category();
+        $storeCategory->category_name = $request->category_name;
+        $storeCategory->category_slug = Str::of($request->category_name)->slug('-');
+        $storeCategory->save();
+        return redirect()->back()->with('success','Data Inserted Successfully');
+        
     }
 
     /**

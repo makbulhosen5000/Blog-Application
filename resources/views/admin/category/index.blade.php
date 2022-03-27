@@ -6,11 +6,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Category List') }}
-                    <a href="{{route('category.create')}}" class="btn btn-info float-end">+Add Category</a>
+                    <a href="{{route('categories.create')}}" class="btn btn-info float-end">+Add Category</a>
                 </div>
 
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table text-center">
                         <thead>
                             <tr>
                                 <td>SL</td>
@@ -20,16 +20,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($allCategory as $key=> $category)
                             <tr>
-                                <td>101</td>
-                                <td>Book</td>
-                                <td>Slug</td>
+                                <td>{{++$key}}</td>
+                                <td>{{$category->category_name}}</td>
+                                <td>{{$category->category_slug}}</td>
                                 <td>
                                     <a href="" class="btn btn-success">Show</a>
                                     <a href="" class="btn btn-info">Edit</a>
                                     <a href="" class="btn btn-danger">Danger</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 
