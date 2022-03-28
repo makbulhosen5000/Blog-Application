@@ -20,7 +20,7 @@
 
                         <div class="form-group">
                             <label for="my-input">Category Name</label>
-                            <input id="my-input" class="form-control @error('category_name') is-invalid @enderror" value="{{ old('category_name') }}" type="text" name="category_name">
+                            <input id="my-input" class="form-control @error('category_name') is-invalid @enderror" value="{{ old('category_name') }}" type="text" name="category_name" placeholder="Enter Category Name" required>
                             @error('category_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

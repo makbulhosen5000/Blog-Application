@@ -22,22 +22,13 @@ class CategoryController extends Controller
         return view('admin.category.index',compact('allCategory'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //_category create function_//
     public function create()
     {
         return view('admin.category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   //_category store function_//
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -71,7 +62,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categoryEdit = Category::find($id);
+        return view('admin.category.edit',compact('categoryEdit'));
     }
 
     /**
@@ -83,7 +75,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $updateCategory = Category::find($id);
+        $updateCategory->category_name = $request->category_name;
+        $updateCategory->category_slug = Str::of($request->category_name)->slug('-');
+        $updateCategory->update();
+        return redirect()->back()->with('success','Data Updated Successfully');
+        
     }
 
     /**
@@ -94,6 +92,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::destroy($id);
+        //$destroyCategory = Category::find($id);
+        //$destroyCategory->delete($id);
+        return redirect()->route('categories.index')->with('success','Data Deleted Successfully');
     }
 }
